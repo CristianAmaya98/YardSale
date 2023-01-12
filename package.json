@@ -30,5 +30,14 @@
     "husky": "^8.0.0",
     "lint-staged": "^13.1.0",
     "prettier": "2.8.2"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "npx prettier --write",
+      "npx eslint --fix"
+    ],
+    "**/*.{html, css}": [
+      "npx prettier --write"
+    ]
   }
 }
