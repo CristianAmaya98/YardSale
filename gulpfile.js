@@ -18,17 +18,25 @@ const routerHTML = `${routerGeneral}/`
 
 const transferirHTML = () => {
   return src(`${routerHTML}/*.html`)
-    .pipe(htmlmin({
-      collapseWhitespace: true,
-      removeComments: true
-    }))
+    .pipe(
+      htmlmin({
+        collapseWhitespace: true,
+        removeComments: true
+      })
+    )
     .pipe(dest(routerBuild))
     .pipe(connect.reload())
 }
 const transferirJavaScript = () => {
   return src(`${routerJavaScript}/*.js`)
     .pipe(sourcemaps.init())
-    .pipe(requireModules({ dist: true, fromDirectory: 'src', distDirectory: routerBuild }))
+    .pipe(
+      requireModules({
+        dist: true,
+        fromDirectory: 'src',
+        distDirectory: routerBuild
+      })
+    )
     .pipe(concat('main.all.js'))
     .pipe(sourcemaps.write())
     .pipe(dest(`${routerBuild}/js`))
@@ -37,9 +45,11 @@ const transferirJavaScript = () => {
 
 const transferirCSS = () => {
   return src(`${routerCSS}/*.css`)
-    .pipe(autoprefixer({
-      cascade: false
-    }))
+    .pipe(
+      autoprefixer({
+        cascade: false
+      })
+    )
     .pipe(cssmin())
     .pipe(rename({ suffix: '.min' }))
     .pipe(dest(`${routerBuild}/css`))
@@ -68,4 +78,10 @@ const watchAndReload = () => {
   watch(routerAssets, assetsTransfer)
 }
 
-exports.default = series(transferirHTML, transferirCSS, transferirJavaScript, assetsTransfer, parallel(watchAndReload, connectLiveReload))
+exports.default = series(
+  transferirHTML,
+  transferirCSS,
+  transferirJavaScript,
+  assetsTransfer,
+  parallel(watchAndReload, connectLiveReload)
+)
