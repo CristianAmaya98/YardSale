@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "gulp",
     "precommit": "npm run format && npm run lint-fix",
     "lint": "eslint ./",
-    "lint-fix": "eslint ./ --fix",
+    "lint-fix": "eslint ./ --cache --cache-strategy content --fix",
     "format": "npx prettier --write ./",
     "prepare": "npx husky-init && husky install",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,9 +25,15 @@
   },
   "homepage": "https://github.com/CristianAmaya98/YardSale#readme",
   "devDependencies": {
+    "@babel/core": "^7.20.12",
     "@babel/eslint-parser": "^7.19.1",
+    "@babel/preset-env": "^7.20.2",
     "@commitlint/cli": "^17.4.1",
     "@commitlint/config-conventional": "^17.4.0",
+    "babel": "^6.23.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-config-standard": "^17.0.0",
@@ -36,14 +43,20 @@
     "eslint-plugin-promise": "^6.1.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
+    "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.7.0",
     "gulp-cssmin": "^0.2.0",
+    "gulp-eslint": "^6.0.0",
     "gulp-htmlmin": "^5.0.1",
     "gulp-rename": "^2.0.0",
-    "gulp-require-modules": "^1.1.4",
     "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
     "husky": "^8.0.0",
-    "prettier": "^2.8.2"
-  }
+    "prettier": "^2.8.3",
+    "standard": "^17.0.0",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "dependencies": {}
 }

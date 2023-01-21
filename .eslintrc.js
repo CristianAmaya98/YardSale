@@ -4,10 +4,16 @@ module.exports = {
     commonjs: true,
     es2021: true
   },
-  extends: 'standard',
-  overrides: [],
+  extends: [
+    'standard',
+    'prettier'
+  ],
+  overrides: [
+  ],
   parserOptions: {
     ecmaVersion: 'latest'
   },
-  rules: {}
+  rules: {
+    'no-unused-vars': 'off'
+  }
 }

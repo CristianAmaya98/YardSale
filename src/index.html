@@ -1,79 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YardSale: Tienda Online</title>
-    <link rel="stylesheet" href="./css/main.min.css" />
-  </head>
+<html lang="es">
 
-  <body>
-    <nav>
-      <img src="./assets/icons/icon_menu.svg" alt="menu" class="menu" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YardSale: Tienda Online</title>
+  <link rel="stylesheet" href="./css/main.min.css" />
+</head>
 
-      <div class="navbar-left">
-        <img src="./assets/logos/logo_yard_sale.svg" alt="logo" class="logo" />
+<body>
+  <nav>
+    <img src="./assets/icons/icon_menu.svg" alt="menu" class="menu" />
 
-        <ul>
-          <li>
-            <a href="/">All</a>
-          </li>
-          <li>
-            <a href="/">Clothes</a>
-          </li>
-          <li>
-            <a href="/">Electronics</a>
-          </li>
-          <li>
-            <a href="/">Furnitures</a>
-          </li>
-          <li>
-            <a href="/">Toys</a>
-          </li>
-          <li>
-            <a href="/">Others</a>
-          </li>
-        </ul>
-      </div>
+    <div class="navbar-left">
+      <img src="./assets/logos/logo_yard_sale.svg" alt="logo" class="logo" />
 
-      <div class="navbar-right">
-        <ul>
-          <li class="navbar-email">user@example.com</li>
-          <li class="navbar-shopping-cart">
-            <img
-              src="./assets/icons/icon_shopping_cart.svg"
-              alt="shopping cart" />
-            <div id="count-cart">0</div>
-          </li>
-        </ul>
-      </div>
+      <ul id="items-navbar">
+        <!-- 
+            <li>
+              <a href="/">All</a>
+            </li> 
+          -->
+      </ul>
+    </div>
 
-      <div class="desktop-menu inactive">
-        <ul>
-          <li>
-            <a href="/" class="title">My orders</a>
-          </li>
+    <div class="navbar-right">
+      <ul>
+        <li class="navbar-email">user@example.com</li>
+        <li class="navbar-shopping-cart">
+          <img src="./assets/icons/icon_shopping_cart.svg" alt="shopping cart" />
+          <div id="count-cart">0</div>
+        </li>
+      </ul>
+    </div>
 
-          <li>
-            <a href="/">My account</a>
-          </li>
+    <div class="desktop-menu inactive">
+      <ul>
+        <li>
+          <a href="/" class="title">My orders</a>
+        </li>
 
-          <li>
-            <a href="/">Sign out</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+        <li>
+          <a href="/">My account</a>
+        </li>
 
-    <aside class="product-detail inactive">
-      <div class="title-container">
-        <img src="./assets/icons/flechita.svg" alt="arrow" />
-        <p class="title">My order</p>
-      </div>
+        <li>
+          <a href="/">Sign out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-      <div class="my-order-content">
-        <!-- <div class="shopping-cart">
+  <aside class="product-detail inactive">
+    <div class="title-container">
+      <img src="./assets/icons/flechita.svg" alt="arrow" />
+      <p class="title">My order</p>
+    </div>
+
+    <div class="my-order-content">
+      <!-- <div class="shopping-cart">
           <figure>
             <img
               src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
@@ -83,21 +69,38 @@
           <p>$ 30,00</p>
           <img src="./assets/icons/icon_close.png" alt="close">
         </div> -->
-      </div>
+    </div>
 
-      <div class="order">
-        <p>
-          <span>Total</span>
-        </p>
-        <p>$ 0</p>
-      </div>
+    <div class="order">
+      <p>
+        <span>Total</span>
+      </p>
+      <p>$ 0</p>
+    </div>
 
-      <button class="primary-button">Checkout</button>
-    </aside>
+    <button class="primary-button">Pagar</button>
+  </aside>
 
-    <section class="main-container">
-      <div class="cards-container">
-        <!-- <div class="product-card">
+  <aside class="product-detail-article inactive">
+    <div class="product-detail-article-close">
+      <img src="./assets/icons/icon_close.png" alt="close">
+    </div>
+    <img id="image-product" src="" alt="">
+    <div class="product-detail-article-info">
+      <p id="price-product">$35,00</p>
+      <p id="name-product">Bike</p>
+      <p id="description-product">With its practical position, this bike also fulfills a decorative function, add your
+        hall or workspace.</p>
+      <button class="primary-button add-to-cart-button">
+        <img src="./assets/icons/bt_add_to_cart.svg" alt="add to cart">
+        Agregar Carrito
+      </button>
+    </div>
+  </aside>
+
+  <section class="main-container">
+    <div class="cards-container">
+      <!-- <div class="product-card">
         <img
           src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
           alt="">
@@ -111,9 +114,10 @@
           </figure>
         </div>
       </div> -->
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <script src="./js/main.all.js"></script>
-  </body>
+  <script src="./js/bundle.all.js"></script>
+</body>
+
 </html>
