@@ -15,7 +15,7 @@ const {
 ;(() => {
   function init() {
     showCounterShopping()
-    showProduct(catalogo[KINDS.PRODUCTS], (isAdd, product) => {
+    showProduct(catalogo[KINDS.PRODUCTS], ({ isAdd, product }) => {
       if (!isAdd) {
         eventProductDetailArticleToggle()
         showArticleShopping(product)

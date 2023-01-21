@@ -27,14 +27,17 @@ module.exports = {
     const imageCartIcon = document.createElement('img')
     imageCartIcon.setAttribute('src', './assets/icons/bt_add_to_cart.svg')
     imageCartIcon.setAttribute('alt', 'carrito de compras')
-
     ;[figureContainer, imageProduct].forEach((element) => {
       element.addEventListener('click', () => {
-        callback(element.getAttribute('id') !== 'imageProduct', {
-          name,
-          image,
-          price,
-          ...values,
+        // eslint-disable-next-line n/no-callback-literal
+        callback({
+          isAdd: element.getAttribute('id') !== 'imageProduct',
+          product: {
+            name,
+            image,
+            price,
+            ...values,
+          },
         })
       })
     })
