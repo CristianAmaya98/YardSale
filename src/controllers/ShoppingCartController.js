@@ -1,24 +1,24 @@
-const { KINDSTORAGE, getData } = require('../services/DBStorage');
+const { KINDSTORAGE, getData } = require('../services/DBStorage')
 
-let productsShopping = [];
+let productsShopping = []
 
 module.exports = {
   addProduct: (product) => {
     if (productsShopping?.length > 0) {
-      productsShopping.unshift(product);
-      return productsShopping;
+      productsShopping.unshift(product)
+      return productsShopping
     }
 
-    productsShopping = [];
-    productsShopping.push(product);
-    return productsShopping;
+    productsShopping = []
+    productsShopping.push(product)
+    return productsShopping
   },
 
   getProduct: () => {
-    return [...productsShopping];
+    return [...productsShopping]
   },
   counterProduct: () => {
-    productsShopping = JSON.parse(getData(KINDSTORAGE.SHOPPING));
-    return productsShopping?.length ? productsShopping.length : 0;
+    productsShopping = JSON.parse(getData(KINDSTORAGE.SHOPPING))
+    return productsShopping?.length ? productsShopping.length : 0
   },
-};
+}

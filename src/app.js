@@ -1,4 +1,4 @@
-const { catalogo, KINDS } = require('./services/Data');
+const { catalogo, KINDS } = require('./services/Data')
 
 const {
   showProduct,
@@ -10,26 +10,26 @@ const {
   showProductShoppingCard,
   eventProductDetailArticleToggle,
   eventNavbarEmail,
-} = require('./controllers/ProductController');
+} = require('./controllers/ProductController')
 
-(() => {
+;(() => {
   function init() {
-    showCounterShopping();
+    showCounterShopping()
     showProduct(catalogo[KINDS.PRODUCTS], (isAdd, product) => {
       if (!isAdd) {
-        eventProductDetailArticleToggle();
-        showArticleShopping(product);
-        return;
+        eventProductDetailArticleToggle()
+        showArticleShopping(product)
+        return
       }
-      addProductShoppingCart(product);
-      showCounterShopping();
-    });
+      addProductShoppingCart(product)
+      showCounterShopping()
+    })
 
-    itemNavbarContainer(catalogo[KINDS.CATEGORY]);
+    itemNavbarContainer(catalogo[KINDS.CATEGORY])
 
-    eventNavbarEmail();
-    eventListenerShopping(showProductShoppingCard);
+    eventNavbarEmail()
+    eventListenerShopping(showProductShoppingCard)
   }
 
-  init();
-})();
+  init()
+})()

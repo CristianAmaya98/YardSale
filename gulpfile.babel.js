@@ -1,19 +1,19 @@
-const { series, parallel, src, dest, watch } = require('gulp');
-const autoprefixer = require('gulp-autoprefixer');
-const connect = require('gulp-connect');
-const cssmin = require('gulp-cssmin');
-const htmlmin = require('gulp-htmlmin');
-const rename = require('gulp-rename');
-const concat = require('gulp-concat');
-const babel = require('gulp-babel');
-const sourcemaps = require('gulp-sourcemaps');
-const eslint = require('gulp-eslint');
+const { series, parallel, src, dest, watch } = require('gulp')
+const autoprefixer = require('gulp-autoprefixer')
+const connect = require('gulp-connect')
+const cssmin = require('gulp-cssmin')
+const htmlmin = require('gulp-htmlmin')
+const rename = require('gulp-rename')
+const concat = require('gulp-concat')
+const babel = require('gulp-babel')
+const sourcemaps = require('gulp-sourcemaps')
+const eslint = require('gulp-eslint')
 
-const babelify = require('babelify');
-const browserify = require('browserify');
-const buffer = require('vinyl-buffer');
-const source = require('vinyl-source-stream');
-const uglify = require('gulp-uglify');
+const babelify = require('babelify')
+const browserify = require('browserify')
+const buffer = require('vinyl-buffer')
+const source = require('vinyl-source-stream')
+const uglify = require('gulp-uglify')
 
 const paths = {
   src: {
@@ -33,14 +33,14 @@ const paths = {
   watch: {
     js: './src/**/*.js',
   },
-};
+}
 
 const esLint = () => {
   return src(paths.src.eslint)
     .pipe(eslint())
     .pipe(eslint.format())
-    .pipe(eslint.failOnError());
-};
+    .pipe(eslint.failOnError())
+}
 
 const transferirHTML = () => {
   return src(paths.src.html)
@@ -51,8 +51,8 @@ const transferirHTML = () => {
       })
     )
     .pipe(dest(paths.build.html))
-    .pipe(connect.reload());
-};
+    .pipe(connect.reload())
+}
 
 const config = {
   browserify: {
@@ -60,7 +60,7 @@ const config = {
     extensions: ['.js'],
     transform: [babelify],
   },
-};
+}
 
 const transferirJavaScript = () => {
   return browserify({
@@ -80,8 +80,8 @@ const transferirJavaScript = () => {
     )
     .pipe(concat('bundle.all.js'))
     .pipe(dest(paths.build.js))
-    .pipe(connect.reload());
-};
+    .pipe(connect.reload())
+}
 
 const transferirCSS = () => {
   return src(paths.src.css)
@@ -93,14 +93,14 @@ const transferirCSS = () => {
     .pipe(cssmin())
     .pipe(rename({ suffix: '.min' }))
     .pipe(dest(paths.build.css))
-    .pipe(connect.reload());
-};
+    .pipe(connect.reload())
+}
 
 const assetsTransfer = () => {
   return src(paths.src.assets)
     .pipe(dest(paths.build.assets))
-    .pipe(connect.reload());
-};
+    .pipe(connect.reload())
+}
 
 const connectLiveReload = () => {
   connect.server({
@@ -108,15 +108,15 @@ const connectLiveReload = () => {
     root: paths.build.root,
     livereload: true,
     port: 3070,
-  });
-};
+  })
+}
 
 const watchAndReload = () => {
-  watch(paths.src.html, transferirHTML);
-  watch(paths.src.css, transferirCSS);
-  watch([paths.src.js, paths.watch.js], transferirJavaScript, esLint);
-  watch(paths.src.assets, assetsTransfer);
-};
+  watch(paths.src.html, transferirHTML)
+  watch(paths.src.css, transferirCSS)
+  watch([paths.src.js, paths.watch.js], transferirJavaScript, esLint)
+  watch(paths.src.assets, assetsTransfer)
+}
 
 exports.default = series(
   transferirHTML,
@@ -125,4 +125,4 @@ exports.default = series(
   esLint,
   assetsTransfer,
   parallel(watchAndReload, connectLiveReload)
-);
+)

@@ -1,15 +1,15 @@
-const imageProduct = document.getElementById('image-product');
-const priceProduct = document.getElementById('price-product');
-const nameProduct = document.getElementById('name-product');
-const descriptionProduct = document.getElementById('description-product');
+const imageProduct = document.getElementById('image-product')
+const priceProduct = document.getElementById('price-product')
+const nameProduct = document.getElementById('name-product')
+const descriptionProduct = document.getElementById('description-product')
 module.exports = {
   detailProduct: ({ name, image, price, description }) => {
-    imageProduct.setAttribute('src', image);
-    priceProduct.innerText = `$ ${price}`;
-    nameProduct.innerText = name;
-    descriptionProduct.innerText = description;
+    imageProduct.setAttribute('src', image)
+    priceProduct.innerText = `$ ${price}`
+    nameProduct.innerText = name
+    descriptionProduct.innerText = description
   },
-};
+}
 
 /*
  <div class="product-detail-article-close">

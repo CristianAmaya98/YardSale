@@ -199,4 +199,4 @@ module.exports = {
     PRODUCTS: 'products',
     CATEGORY: 'category',
   },
-};
+}
