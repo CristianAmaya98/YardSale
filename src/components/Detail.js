@@ -1,13 +1,38 @@
+const { Product } = require('../models/Product')
+
 const imageProduct = document.getElementById('image-product')
 const priceProduct = document.getElementById('price-product')
 const nameProduct = document.getElementById('name-product')
 const descriptionProduct = document.getElementById('description-product')
+const shoppingButton = document.getElementById('shoppingButton')
+const buttonClose = document.getElementById('button-close')
+
 module.exports = {
-  detailProduct: ({ name, image, price, description }) => {
-    imageProduct.setAttribute('src', image)
-    priceProduct.innerText = `$ ${price}`
-    nameProduct.innerText = name
-    descriptionProduct.innerText = description
+  detailProduct: ({ product, onEventAdd, onEventClosed }) => {
+    if (product instanceof Product) {
+      const { image, price, description, name } = product
+      imageProduct.setAttribute('src', image)
+      priceProduct.innerText = `$ ${price}`
+      nameProduct.innerText = name
+      descriptionProduct.innerText = description
+
+      buttonClose.addEventListener('click', () => {
+        onEventClosed()
+      })
+
+      shoppingButton.addEventListener('click', () => {
+        onEventAdd(product)
+      })
+
+      // [shoppingButton, buttonClose].forEach((element) => {
+      //   element.addEventListener('click', () => {
+      //     resolve({
+      //       close: !element.getAttribute('id').includes('shoppingButton'),
+      //       productSelected: { name, image, price, description, ...values },
+      //     });
+      //   });
+      // });
+    }
   },
 }
 

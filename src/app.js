@@ -1,5 +1,3 @@
-const { catalogo, KINDS } = require('./services/Data')
-
 const {
   showProduct,
   showCounterShopping,
@@ -11,24 +9,57 @@ const {
   eventProductDetailArticleToggle,
   eventNavbarEmail,
 } = require('./controllers/ProductController')
+const { getCategories } = require('./services/CategoryService')
+const { getProducts } = require('./services/ProductService')
 
 ;(() => {
-  function init() {
+  async function init() {
     showCounterShopping()
-    showProduct(catalogo[KINDS.PRODUCTS], ({ isAdd, product }) => {
-      if (!isAdd) {
-        eventProductDetailArticleToggle()
-        showArticleShopping(product)
-        return
-      }
-      addProductShoppingCart(product)
+
+    function productAdd({ product }) {
+      addProductShoppingCart({ product })
       showCounterShopping()
+    }
+
+    function showDetailArticle(product) {
+      showArticleShopping({
+        product,
+        onEventAdd: (product) => {
+          console.log(product)
+          productAdd({ product })
+        },
+        onEventClosed: () => {
+          eventProductDetailArticleToggle()
+        },
+      })
+    }
+
+    showProduct({
+      products: getProducts(),
+      onEventAdd: (product) => {
+        productAdd({ product })
+      },
+      onEventDetail: (product) => {
+        eventProductDetailArticleToggle()
+        showDetailArticle(product)
+      },
     })
 
-    itemNavbarContainer(catalogo[KINDS.CATEGORY])
+    // if (isAdd) {
+    //   eventProductDetailArticleToggle();
+    //   const { close, productSelected } = showArticleShopping(product);
+    //   if (close) {
+    //     console.log('Hello');
+    //     eventProductDetailArticleToggle();
+    //   }
+    // } else {
+    //   addProductShoppingCart(product);
+    //   showCounterShopping();
+    // }
 
-    eventNavbarEmail()
-    eventListenerShopping(showProductShoppingCard)
+    // itemNavbarContainer(getCategories());
+    // eventNavbarEmail();
+    // eventListenerShopping(showProductShoppingCard);
   }
 
   init()

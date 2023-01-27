@@ -1,54 +1,70 @@
+const {
+  ComponentElementDiv,
+  ComponentAttribute,
+  ComponentElementImage,
+  ComponentElementP,
+  ComponentElementFigure,
+} = require('./Components')
+
 module.exports = {
-  productCard: ({ name, image, price, ...values }, callback) => {
-    const productContainer = document.createElement('div')
-    productContainer.classList.add('product-card')
-
-    const imageProduct = document.createElement('img')
-    imageProduct.setAttribute('id', 'imageProduct')
-    imageProduct.setAttribute('src', image)
-
-    const productInfoContainer = document.createElement('div')
-    productInfoContainer.classList.add('product-info')
-
-    const productDivConainer = document.createElement('div')
-
-    const priceProduct = document.createElement('p')
-    priceProduct.innerText = `$ ${price}`
-
-    const nameProduct = document.createElement('p')
-    nameProduct.innerText = name
-
-    productDivConainer.appendChild(priceProduct)
-    productDivConainer.appendChild(nameProduct)
-    productInfoContainer.appendChild(productDivConainer)
-
-    const figureContainer = document.createElement('figure')
-
-    const imageCartIcon = document.createElement('img')
-    imageCartIcon.setAttribute('src', './assets/icons/bt_add_to_cart.svg')
-    imageCartIcon.setAttribute('alt', 'carrito de compras')
-    ;[figureContainer, imageProduct].forEach((element) => {
-      element.addEventListener('click', () => {
-        // eslint-disable-next-line n/no-callback-literal
-        callback({
-          isAdd: element.getAttribute('id') !== 'imageProduct',
-          product: {
-            name,
-            image,
-            price,
-            ...values,
+  productCard: ({ product, onEventAdd, onEventDetail }) => {
+    const { name, image, price } = product
+    return new ComponentElementDiv({
+      attributes: [
+        new ComponentAttribute({ id: 'class', value: 'product-card' }),
+      ],
+      children: [
+        new ComponentElementImage({
+          urlImage: image,
+          attributes: [
+            new ComponentAttribute({ id: 'id', value: 'imageProduct' }),
+          ],
+          onClick: () => {
+            onEventDetail(product)
           },
-        })
-      })
-    })
-    figureContainer.appendChild(imageCartIcon)
-    productInfoContainer.appendChild(figureContainer)
+        }),
 
-    productContainer.appendChild(imageProduct)
-    productContainer.appendChild(productInfoContainer)
-    return productContainer
+        new ComponentElementDiv({
+          attributes: [
+            new ComponentAttribute({ id: 'class', value: 'product-info' }),
+          ],
+          children: [
+            new ComponentElementDiv({
+              children: [
+                new ComponentElementP({
+                  text: `$ ${price}`,
+                }),
+                new ComponentElementP({
+                  text: name,
+                }),
+              ],
+            }),
+
+            new ComponentElementFigure({
+              onClick: () => {
+                onEventAdd(product)
+              },
+              children: [
+                new ComponentElementImage({
+                  urlImage: './assets/icons/bt_add_to_cart.svg',
+                  attributes: [
+                    new ComponentAttribute({
+                      id: 'alt',
+                      value: 'carrito de compras',
+                    }),
+                  ],
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    })
   },
-  productShoppingCard: ({ name, image, price, ...values }) => {
+
+  productShoppingCard: ({ product }) => {
+    const { name, image, price } = product
+
     const shoppingContainer = document.createElement('div')
     shoppingContainer.classList.add('shopping-cart')
 

@@ -4,6 +4,7 @@ const { navbarItem } = require('../components/Navbar')
 const { productCard, productShoppingCard } = require('../components/Cards')
 const { getProduct, counterProduct } = require('./ShoppingCartController')
 const { detailProduct } = require('../components/Detail')
+const { Product } = require('../models/Product')
 
 const cardsContainer = document.querySelector('.cards-container')
 const counterCart = document.getElementById('count-cart')
@@ -18,17 +19,37 @@ const productDetailShopping = document.querySelector('.product-detail')
 navbarEmail.innerText = 'platzi@example.com'
 
 module.exports = {
-  addProductShoppingCart: (product) => {
-    addData(KINDSTORAGE.SHOPPING, addProduct(product))
+  addProductShoppingCart: ({ product }) => {
+    if (product instanceof Product) {
+      addData(KINDSTORAGE.SHOPPING, addProduct(product))
+    }
   },
-  showArticleShopping: (product) => {
-    detailProduct(product)
+  showArticleShopping: ({
+    product,
+    onEventAdd,
+    onEventClosed: onEventCloseListener,
+  }) => {
+    productDetailArticle.setAttribute('data-detail', 'active')
+    detailProduct({
+      product,
+      onEventAdd,
+      onEventClosed: () => {
+        productDetailArticle.setAttribute('data-detail', 'enactive')
+        onEventCloseListener()
+      },
+    })
   },
 
-  showProduct: (products, callback) => {
-    for (const product of products) {
-      cardsContainer.appendChild(productCard(product, callback))
-    }
+  showProduct: ({ products = [], onEventAdd, onEventDetail }) => {
+    products.forEach((product) =>
+      cardsContainer.appendChild(
+        productCard({
+          product,
+          onEventAdd,
+          onEventDetail,
+        })
+      )
+    )
   },
 
   showProductShoppingCard: () => {
@@ -59,6 +80,8 @@ module.exports = {
   // Get Event
 
   eventProductDetailArticleToggle: () => {
+    if (!productDetailArticle.getAttribute('data-detail').includes('enactive'))
+      return
     productDetailArticle.classList.toggle('inactive')
   },
 
