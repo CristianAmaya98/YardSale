@@ -4,7 +4,8 @@ const {
   ComponentElementImage,
   ComponentElementP,
   ComponentElementFigure,
-} = require('./Components')
+  ComponentEvent,
+} = require('./core/Components')
 
 module.exports = {
   productCard: ({ product, onEventAdd, onEventDetail }) => {
@@ -19,9 +20,14 @@ module.exports = {
           attributes: [
             new ComponentAttribute({ id: 'id', value: 'imageProduct' }),
           ],
-          onClick: () => {
-            onEventDetail(product)
-          },
+          events: [
+            new ComponentEvent({
+              event: 'click',
+              callback: () => {
+                onEventDetail(product)
+              },
+            }),
+          ],
         }),
 
         new ComponentElementDiv({
@@ -41,9 +47,14 @@ module.exports = {
             }),
 
             new ComponentElementFigure({
-              onClick: () => {
-                onEventAdd(product)
-              },
+              events: [
+                new ComponentEvent({
+                  event: 'click',
+                  callback: () => {
+                    onEventAdd(product)
+                  },
+                }),
+              ],
               children: [
                 new ComponentElementImage({
                   urlImage: './assets/icons/bt_add_to_cart.svg',

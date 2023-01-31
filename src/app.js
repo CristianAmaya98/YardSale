@@ -1,4 +1,9 @@
 const {
+  login,
+  eventNavbarEmail,
+  validateUser,
+} = require('./controllers/LoginController')
+const {
   showProduct,
   showCounterShopping,
   itemNavbarContainer,
@@ -7,15 +12,13 @@ const {
   eventListenerShopping,
   showProductShoppingCard,
   eventProductDetailArticleToggle,
-  eventNavbarEmail,
 } = require('./controllers/ProductController')
 const { getCategories } = require('./services/CategoryService')
 const { getProducts } = require('./services/ProductService')
+const { validateSectionUser } = require('./services/UserService')
 
 ;(() => {
-  async function init() {
-    showCounterShopping()
-
+  function initProduct() {
     function productAdd({ product }) {
       addProductShoppingCart({ product })
       showCounterShopping()
@@ -25,7 +28,10 @@ const { getProducts } = require('./services/ProductService')
       showArticleShopping({
         product,
         onEventAdd: (product) => {
-          console.log(product)
+          if (!validateSectionUser()) {
+            login()
+            return
+          }
           productAdd({ product })
         },
         onEventClosed: () => {
@@ -37,6 +43,10 @@ const { getProducts } = require('./services/ProductService')
     showProduct({
       products: getProducts(),
       onEventAdd: (product) => {
+        if (!validateSectionUser()) {
+          login()
+          return
+        }
         productAdd({ product })
       },
       onEventDetail: (product) => {
@@ -44,23 +54,19 @@ const { getProducts } = require('./services/ProductService')
         showDetailArticle(product)
       },
     })
-
-    // if (isAdd) {
-    //   eventProductDetailArticleToggle();
-    //   const { close, productSelected } = showArticleShopping(product);
-    //   if (close) {
-    //     console.log('Hello');
-    //     eventProductDetailArticleToggle();
-    //   }
-    // } else {
-    //   addProductShoppingCart(product);
-    //   showCounterShopping();
-    // }
-
-    // itemNavbarContainer(getCategories());
-    // eventNavbarEmail();
-    // eventListenerShopping(showProductShoppingCard);
   }
 
-  init()
+  showCounterShopping()
+  itemNavbarContainer(getCategories())
+
+  eventNavbarEmail({
+    validate: validateSectionUser(),
+    onLogin: () => {
+      login()
+    },
+  })
+
+  validateUser()
+
+  initProduct()
 })()

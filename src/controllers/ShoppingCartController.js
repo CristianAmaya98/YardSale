@@ -18,7 +18,7 @@ module.exports = {
     return [...productsShopping]
   },
   counterProduct: () => {
-    productsShopping = JSON.parse(getData(KINDSTORAGE.SHOPPING))
+    productsShopping = JSON.parse(getData({ key: KINDSTORAGE.SHOPPING }))
     return productsShopping?.length ? productsShopping.length : 0
   },
 }

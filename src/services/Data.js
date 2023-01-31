@@ -326,10 +326,14 @@ module.exports = {
         categories: [],
       },
     ],
+    login: {
+      validate_credenciales: false,
+    },
   },
 
   KINDS: {
     PRODUCTS: 'products',
     CATEGORY: 'category',
+    LOGIN: 'login',
   },
 }
