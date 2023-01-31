@@ -1,7 +1,10 @@
 const { sectionLogin } = require('../components/SectionContainer')
-const { EMAIL_DEFAULT } = require('../constantes')
 const { UserLogin } = require('../models/User')
-const { addData, KINDSTORAGE, getData } = require('../services/DBStorage')
+const {
+  saveSectionUser,
+  getEmailUser,
+  validateSectionUser,
+} = require('../services/UserService')
 const desktopMenu = document.querySelector('.desktop-menu')
 const navbarEmail = document.querySelector('.navbar-email')
 
@@ -9,10 +12,7 @@ module.exports = {
   login: () => {
     sectionLogin({
       onLogin: ({ email, password }) => {
-        addData({
-          key: KINDSTORAGE.USER,
-          data: new UserLogin({ email, password }),
-        })
+        saveSectionUser({ user: new UserLogin({ email, password }) })
       },
     })
   },
@@ -28,7 +28,10 @@ module.exports = {
   },
 
   validateUser: () => {
-    const userData = JSON.parse(getData({ key: KINDSTORAGE.USER }))
-    navbarEmail.innerText = userData?.email ? userData.email : EMAIL_DEFAULT
+    navbarEmail.innerText = getEmailUser()
+  },
+
+  validateSection: () => {
+    return validateSectionUser()
   },
 }

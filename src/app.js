@@ -1,21 +1,19 @@
 const {
-  login,
+  headerCategoriesContainer,
+} = require('./controllers/CategoryController')
+const {
   eventNavbarEmail,
+  login,
+  validateSection,
   validateUser,
 } = require('./controllers/LoginController')
 const {
-  showProduct,
-  showCounterShopping,
-  itemNavbarContainer,
   addProductShoppingCart,
-  showArticleShopping,
-  eventListenerShopping,
-  showProductShoppingCard,
   eventProductDetailArticleToggle,
+  showArticleShopping,
+  showCounterShopping,
+  showProduct,
 } = require('./controllers/ProductController')
-const { getCategories } = require('./services/CategoryService')
-const { getProducts } = require('./services/ProductService')
-const { validateSectionUser } = require('./services/UserService')
 
 ;(() => {
   function initProduct() {
@@ -28,7 +26,7 @@ const { validateSectionUser } = require('./services/UserService')
       showArticleShopping({
         product,
         onEventAdd: (product) => {
-          if (!validateSectionUser()) {
+          if (!validateSection()) {
             login()
             return
           }
@@ -41,9 +39,8 @@ const { validateSectionUser } = require('./services/UserService')
     }
 
     showProduct({
-      products: getProducts(),
       onEventAdd: (product) => {
-        if (!validateSectionUser()) {
+        if (!validateSection()) {
           login()
           return
         }
@@ -57,10 +54,10 @@ const { validateSectionUser } = require('./services/UserService')
   }
 
   showCounterShopping()
-  itemNavbarContainer(getCategories())
+  headerCategoriesContainer()
 
   eventNavbarEmail({
-    validate: validateSectionUser(),
+    validate: validateSection(),
     onLogin: () => {
       login()
     },

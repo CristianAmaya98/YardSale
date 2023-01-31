@@ -1,17 +1,13 @@
 const { addData, KINDSTORAGE } = require('../services/DBStorage')
 const { addProduct } = require('./ShoppingCartController')
-const { navbarItem } = require('../components/Navbar')
-const { productCard, productShoppingCard } = require('../components/Cards')
-const { getProduct, counterProduct } = require('./ShoppingCartController')
 const { detailProduct } = require('../components/Detail')
+const { getProduct, counterProduct } = require('./ShoppingCartController')
 const { Product } = require('../models/Product')
+const { productCard, productShoppingCard } = require('../components/Cards')
 const { sectionProducts } = require('../components/SectionContainer')
-
+const { getProducts } = require('../services/ProductService')
 const counterCart = document.getElementById('count-cart')
-
 const myOrderContent = document.querySelector('.my-order-content')
-
-const navbarItemsContainer = document.querySelector('#items-navbar')
 const navbarShoppingCart = document.querySelector('.navbar-shopping-cart')
 const productDetailArticle = document.querySelector('.product-detail-article')
 const productDetailShopping = document.querySelector('.product-detail')
@@ -41,7 +37,8 @@ module.exports = {
     })
   },
 
-  showProduct: ({ products = [], onEventAdd, onEventDetail }) => {
+  showProduct: ({ onEventAdd, onEventDetail }) => {
+    const products = getProducts()
     const cardsContainer = sectionProducts()
     products.forEach((product) =>
       cardsContainer.appendChild(
@@ -61,11 +58,6 @@ module.exports = {
   },
   showCounterShopping: () => {
     counterCart.innerText = counterProduct()
-  },
-  itemNavbarContainer: (items) => {
-    for (const item of items) {
-      navbarItemsContainer.appendChild(navbarItem(item))
-    }
   },
 
   eventListenerShopping: (callback) => {
