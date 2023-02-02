@@ -3,10 +3,12 @@ const { navbarItem } = require('../components/Navbar')
 const { getCategories } = require('../services/CategoryService')
 
 module.exports = {
-  headerCategoriesContainer: () => {
+  headerCategoriesContainer: ({ onFilterCategories }) => {
     const categories = getCategories()
     categories.forEach((category) => {
-      navbarItemsContainer.appendChild(navbarItem(category))
+      navbarItemsContainer.appendChild(
+        navbarItem({ category, onFilterCategories })
+      )
     })
   },
 }

@@ -73,34 +73,40 @@ module.exports = {
     })
   },
 
-  productShoppingCard: ({ product }) => {
+  productShoppingCard: (product) => {
+    console.log({ product })
     const { name, image, price } = product
-
-    const shoppingContainer = document.createElement('div')
-    shoppingContainer.classList.add('shopping-cart')
-
-    const figureContainer = document.createElement('figure')
-
-    const imageProduct = document.createElement('img')
-    imageProduct.setAttribute('src', image)
-
-    figureContainer.appendChild(imageProduct)
-    shoppingContainer.appendChild(figureContainer)
-
-    const priceProduct = document.createElement('p')
-    priceProduct.innerText = `$ ${price}`
-
-    const nameProduct = document.createElement('p')
-    nameProduct.innerText = name
-
-    shoppingContainer.appendChild(priceProduct)
-    shoppingContainer.appendChild(nameProduct)
-
-    const imageCartIcon = document.createElement('img')
-    imageCartIcon.setAttribute('src', './assets/icons/icon_close.png')
-    imageCartIcon.setAttribute('alt', 'close')
-    shoppingContainer.appendChild(imageCartIcon)
-
-    return shoppingContainer
+    return new ComponentElementDiv({
+      attributes: [
+        new ComponentAttribute({
+          id: 'class',
+          value: 'shopping-cart',
+        }),
+      ],
+      children: [
+        new ComponentElementFigure({
+          children: [
+            new ComponentElementImage({
+              urlImage: image,
+            }),
+          ],
+        }),
+        new ComponentElementP({
+          text: `$ ${price.toLocaleString()}`,
+        }),
+        new ComponentElementP({
+          text: name,
+        }),
+        new ComponentElementImage({
+          urlImage: './assets/icons/icon_close.png',
+          attributes: [
+            new ComponentAttribute({
+              id: 'alt',
+              value: 'close',
+            }),
+          ],
+        }),
+      ],
+    })
   },
 }

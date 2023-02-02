@@ -10,4 +10,9 @@ module.exports = {
         new Product({ name, image, price, categoria, description, descuento })
     )
   },
+
+  filterProductsCategory: ({ codeCategories }) => {
+    const products = catalogo[KINDS.PRODUCTS]
+    return products.filter(({ categoria }) => categoria === codeCategories)
+  },
 }

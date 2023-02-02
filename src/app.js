@@ -8,12 +8,16 @@ const {
   validateUser,
 } = require('./controllers/LoginController')
 const {
-  addProductShoppingCart,
   eventProductDetailArticleToggle,
   showArticleShopping,
-  showCounterShopping,
   showProduct,
 } = require('./controllers/ProductController')
+const {
+  showCounterShopping,
+  addProductShoppingCart,
+  eventListenerShopping,
+  showProductShoppingCard,
+} = require('./controllers/ShoppingCartController')
 
 ;(() => {
   function initProduct() {
@@ -51,10 +55,28 @@ const {
         showDetailArticle(product)
       },
     })
+
+    headerCategoriesContainer({
+      onFilterCategories: ({ name, codeCategories }) => {
+        showProduct({
+          onEventAdd: (product) => {
+            if (!validateSection()) {
+              login()
+              return
+            }
+            productAdd({ product })
+          },
+          onEventDetail: (product) => {
+            eventProductDetailArticleToggle()
+            showDetailArticle(product)
+          },
+          codeCategories,
+        })
+      },
+    })
   }
 
   showCounterShopping()
-  headerCategoriesContainer()
 
   eventNavbarEmail({
     validate: validateSection(),
@@ -66,4 +88,14 @@ const {
   validateUser()
 
   initProduct()
+
+  eventListenerShopping({
+    callback: () => {
+      showProductShoppingCard({
+        callback: () => {
+          showCounterShopping()
+        },
+      })
+    },
+  })
 })()

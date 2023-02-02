@@ -58,6 +58,8 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
+    "ngx-toastr": "^16.0.2",
+    "sweetalert2": "^11.7.1",
     "uuid": "^9.0.0"
   }
 }
