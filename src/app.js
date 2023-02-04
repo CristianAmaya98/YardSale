@@ -1,101 +1,52 @@
+const { MainContainerRoot, HeaderNavbarComponent } = require('./components')
 const {
-  headerCategoriesContainer,
-} = require('./controllers/CategoryController')
-const {
-  eventNavbarEmail,
-  login,
-  validateSection,
-  validateUser,
-} = require('./controllers/LoginController')
-const {
-  eventProductDetailArticleToggle,
-  showArticleShopping,
-  showProduct,
-} = require('./controllers/ProductController')
-const {
-  showCounterShopping,
-  addProductShoppingCart,
-  eventListenerShopping,
-  showProductShoppingCard,
-} = require('./controllers/ShoppingCartController')
+  CategoryController,
+  ProductsController,
+  ShoppingCartController,
+} = require('./controllers')
 
-;(() => {
-  function initProduct() {
-    function productAdd({ product }) {
-      addProductShoppingCart({ product })
-      showCounterShopping()
-    }
+;(function () {
+  const mainContainerRoot = MainContainerRoot()
 
-    function showDetailArticle(product) {
-      showArticleShopping({
-        product,
-        onEventAdd: (product) => {
-          if (!validateSection()) {
-            login()
-            return
-          }
-          productAdd({ product })
-        },
-        onEventClosed: () => {
-          eventProductDetailArticleToggle()
-        },
-      })
-    }
+  mainContainerRoot.addComponent({
+    component: HeaderNavbarComponent().show({ childrenCategories: [] }),
+  })
 
-    showProduct({
-      onEventAdd: (product) => {
-        if (!validateSection()) {
-          login()
-          return
-        }
-        productAdd({ product })
-      },
-      onEventDetail: (product) => {
-        eventProductDetailArticleToggle()
-        showDetailArticle(product)
-      },
-    })
+  // -----------------------------------------------------------//
+  const shoppingCartController = ShoppingCartController()
+  const productController = ProductsController()
+  const categoryController = CategoryController()
 
-    headerCategoriesContainer({
-      onFilterCategories: ({ name, codeCategories }) => {
-        showProduct({
-          onEventAdd: (product) => {
-            if (!validateSection()) {
-              login()
-              return
-            }
-            productAdd({ product })
-          },
-          onEventDetail: (product) => {
-            eventProductDetailArticleToggle()
-            showDetailArticle(product)
-          },
-          codeCategories,
-        })
-      },
+  const addProductCartShopping = (product) => {
+    shoppingCartController.addProductShoppingCart({ product })
+    shoppingCartController.showCounterShopping()
+  }
+
+  const detailProduct = (product) => {
+    productController.showDetailProduct({
+      product,
+      onEventAdd: addProductCartShopping,
     })
   }
 
-  showCounterShopping()
+  // shoppingCartController.showCounterShopping()
+  // shoppingCartController.showProductShoppingCard()
 
-  eventNavbarEmail({
-    validate: validateSection(),
-    onLogin: () => {
-      login()
-    },
-  })
+  // categoryController.headerCategoriesContainer({
+  //   onFilterCategories: ({ name, codeCategories }) => {
+  //     console.log(codeCategories)
+  //     productController.showFilterCodeCategoryProducts({
+  //       codeCategory: codeCategories,
+  //       onEventAdd: addProductCartShopping,
+  //       onEventDetail: detailProduct,
+  //     })
+  //   },
+  // })
 
-  validateUser()
-
-  initProduct()
-
-  eventListenerShopping({
-    callback: () => {
-      showProductShoppingCard({
-        callback: () => {
-          showCounterShopping()
-        },
-      })
-    },
+  mainContainerRoot.addComponent({
+    component: productController.showProducts({
+      onEventAdd: addProductCartShopping,
+      onEventDetail: detailProduct,
+    }),
   })
 })()

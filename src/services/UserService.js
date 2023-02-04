@@ -1,5 +1,5 @@
 const { EMAIL_DEFAULT } = require('../constantes')
-const { catalogo, KINDS } = require('./Data')
+const { catalogo, KINDS } = require('../db/Data')
 const { KINDSTORAGE, getData, addData } = require('./DBStorage')
 
 module.exports = {

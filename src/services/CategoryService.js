@@ -1,5 +1,5 @@
 const { Category } = require('../models/Category')
-const { catalogo, KINDS } = require('./Data')
+const { catalogo, KINDS } = require('../db/Data')
 
 module.exports = {
   getCategories: () => {

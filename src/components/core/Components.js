@@ -47,21 +47,33 @@ function _ComponentElement({
   return elementHTML
 }
 
-function ComponentElementDiv({ attributes = [], children = [], events = [] }) {
+function ComponentElementDiv({
+  attributes = [],
+  text = '',
+  children = [],
+  events = [],
+}) {
   return new _ComponentElement({
     element: 'div',
     attributes,
     children,
     events,
+    text,
   })
 }
 
-function ComponentElementP({ attributes = [], text = '', events = [] }) {
+function ComponentElementP({
+  attributes = [],
+  text = '',
+  events = [],
+  children = [],
+}) {
   return new _ComponentElement({
     element: 'p',
     attributes,
     text,
     events,
+    children,
   })
 }
 
@@ -198,21 +210,98 @@ function ComponentElementLink({
   })
 }
 
-function ComponentElementButton({ text = '', attributes = [], events = [] }) {
+function ComponentElementButton({
+  text = '',
+  attributes = [],
+  events = [],
+  urlImage = '',
+  attributesImage = [],
+}) {
   return new _ComponentElement({
     element: 'button',
     text,
     attributes,
     events,
+    children:
+      urlImage !== ''
+        ? [
+            new ComponentElementImage({
+              urlImage,
+              attributes: [
+                new ComponentAttribute({ id: 'alt', value: 'add to cart' }),
+                ...attributesImage,
+              ],
+            }),
+          ]
+        : [],
   })
 }
 
-function ComponentElementLi({ attributes = [], events = [], children = [] }) {
+function ComponentElementLi({
+  attributes = [],
+  text = '',
+  events = [],
+  children = [],
+}) {
   return new _ComponentElement({
     element: 'li',
     attributes,
     events,
     children,
+    text,
+  })
+}
+
+function ComponenteElementAside({
+  attributes = [],
+  events = [],
+  children = [],
+}) {
+  return new _ComponentElement({
+    element: 'aside',
+    attributes,
+    children,
+    events,
+  })
+}
+
+function ComponenteElementSpan({ attributes = [], text = '', events = [] }) {
+  return new _ComponentElement({
+    element: 'span',
+    attributes,
+    text,
+    events,
+  })
+}
+
+function ComponenteElementNav({ attributes = [], children = [], events = [] }) {
+  return new _ComponentElement({
+    element: 'nav',
+    attributes,
+    children,
+    events,
+  })
+}
+
+function ComponenteElementUl({ attributes = [], children = [], events = [] }) {
+  return new _ComponentElement({
+    element: 'ul',
+    attributes,
+    children,
+    events,
+  })
+}
+
+function ComponentElementSection({
+  attributes = [],
+  children = [],
+  events = [],
+}) {
+  return new _ComponentElement({
+    element: 'section',
+    attributes,
+    children,
+    events,
   })
 }
 
@@ -230,4 +319,9 @@ module.exports = {
   ComponentElementLink,
   ComponentElementButton,
   ComponentElementLi,
+  ComponenteElementAside,
+  ComponenteElementSpan,
+  ComponenteElementNav,
+  ComponenteElementUl,
+  ComponentElementSection,
 }
