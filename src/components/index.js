@@ -1,9 +1,19 @@
-const { CardProductComponent, CardShoppingComponent } = require('./Cards')
+const {
+  CardProductComponent,
+  CardShoppingComponent,
+  MainProductsContainerCards,
+  CardContainer,
+} = require('./Cards')
 const { DetailProductComponent, DetailShoppingComponent } = require('./Detail')
-const { NavbarCategoriesComponent } = require('./Navbar')
+const {
+  NavbarCategoriesComponent,
+  NavbarRightComponent,
+  NavbarLeftComponent,
+} = require('./Navbar')
 const { MainContainerRoot } = require('./Main')
 const { HeaderNavbarComponent } = require('./Header')
 const { SectionProduct } = require('./Section')
+
 module.exports = {
   CardProductComponent,
   CardShoppingComponent,
@@ -13,4 +23,8 @@ module.exports = {
   MainContainerRoot,
   HeaderNavbarComponent,
   SectionProduct,
+  NavbarLeftComponent,
+  NavbarRightComponent,
+  MainProductsContainerCards,
+  CardContainer,
 }

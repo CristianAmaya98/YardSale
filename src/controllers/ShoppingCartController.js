@@ -50,8 +50,7 @@ const ShoppingCartController = () => {
     },
 
     showCounterShopping: () => {
-      const counterCart = document.getElementById('count-cart')
-      counterCart.innerText = shoppingCartProductService.counterProductsCart()
+      return shoppingCartProductService.counterProductsCart()
     },
   }
 }

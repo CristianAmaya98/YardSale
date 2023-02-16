@@ -2,12 +2,8 @@ const { detailProduct } = require('../components/Detail')
 
 const { Product } = require('../models/Product')
 
-const {
-  sectionProducts,
-  cleanMainContainer,
-} = require('../components/SectionContainer')
 const { ProductService } = require('../services/ProductService')
-const { CardProductComponent } = require('../components')
+const { CardProductComponent, CardContainer } = require('../components')
 
 const ProductsController = () => {
   const elementContainer = document.querySelector('#aside')
@@ -18,7 +14,7 @@ const ProductsController = () => {
     onEventAdd = () => {},
     onEventDetail = () => {},
   }) => {
-    const cardsContainer = sectionProducts()
+    const cardsContainer = CardContainer()
     products.forEach((product) =>
       cardsContainer.appendChild(
         CardProductComponent({
@@ -54,7 +50,6 @@ const ProductsController = () => {
       onEventAdd = () => {},
       onEventDetail = () => {},
     }) => {
-      cleanMainContainer() // TODO SE DEBE MEJORAR ESTA LOGICA
       const products = productService.filterProductCodeCategory({
         codeCategory,
       })

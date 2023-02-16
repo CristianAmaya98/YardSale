@@ -1,5 +1,3 @@
-const navbarItemsContainer = document.querySelector('#items-navbar')
-
 const { NavbarCategoriesComponent } = require('../components')
 const { getCategories } = require('../services/CategoryService')
 
@@ -8,11 +6,9 @@ const CategoryController = () => {
 
   return {
     headerCategoriesContainer: ({ onFilterCategories = () => {} }) => {
-      categories.forEach((category) => {
-        navbarItemsContainer.appendChild(
-          NavbarCategoriesComponent({ category }).show({ onFilterCategories })
-        )
-      })
+      return categories.map((category) =>
+        NavbarCategoriesComponent({ category, onFilterCategories })
+      )
     },
   }
 }
