@@ -11,25 +11,7 @@ const {
   ComponentEvent,
 } = require('./core/Components')
 
-// const mainContainer = document.querySelector('.main-container')
-
 module.exports = {
-  sectionProducts: () => {
-    const cardsContainer = new ComponentElementDiv({
-      attributes: [
-        new ComponentAttribute({
-          id: 'class',
-          value: 'cards-container',
-        }),
-      ],
-    })
-    return cardsContainer
-  },
-
-  // cleanMainContainer: () => {
-  //   // mainContainer.innerHTML = ''
-  // },
-
   sectionLogin: ({
     onLogin = () => {},
     onForgotPassword = () => {},

@@ -5,6 +5,7 @@ const {
   ComponentElementP,
   ComponentElementFigure,
   ComponentEvent,
+  ComponentElementSection,
 } = require('./core/Components')
 
 const CardProductComponent = ({ product }) => {
@@ -116,4 +117,26 @@ const CardShoppingComponent = ({ product }) => {
   }
 }
 
-module.exports = { CardProductComponent, CardShoppingComponent }
+const MainProductsContainerCards = ({ childrenProducts = [] }) => {
+  return new ComponentElementSection({
+    children: childrenProducts,
+  })
+}
+
+const CardContainer = () => {
+  return new ComponentElementDiv({
+    attributes: [
+      new ComponentAttribute({
+        id: 'class',
+        value: 'cards-container',
+      }),
+    ],
+  })
+}
+
+module.exports = {
+  CardProductComponent,
+  CardShoppingComponent,
+  MainProductsContainerCards,
+  CardContainer,
+}
