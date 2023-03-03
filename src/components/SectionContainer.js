@@ -27,6 +27,9 @@ module.exports = {
     return cardsContainer
   },
 
+  cleanMainContainer: () => {
+    mainContainer.innerHTML = ''
+  },
   sectionLogin: ({
     onLogin = () => {},
     onForgotPassword = () => {},

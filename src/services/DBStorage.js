@@ -7,6 +7,10 @@ module.exports = {
     return localStorage.getItem(key)
   },
 
+  removeData: ({ key }) => {
+    return localStorage.removeItem(key)
+  },
+
   KINDSTORAGE: {
     SHOPPING: 'shopping',
     USER: 'user',
