@@ -1,56 +1,197 @@
-const { Product } = require('../models/Product')
+const {
+  ComponenteElementAside,
+  ComponentAttribute,
+  ComponentElementDiv,
+  ComponentElementImage,
+  ComponentElementP,
+  ComponentElementButton,
+  ComponentEvent,
+  ComponenteElementSpan,
+} = require('./core/Components')
 
-const imageProduct = document.getElementById('image-product')
-const priceProduct = document.getElementById('price-product')
-const nameProduct = document.getElementById('name-product')
-const descriptionProduct = document.getElementById('description-product')
-const shoppingButton = document.getElementById('shoppingButton')
-const buttonClose = document.getElementById('button-close')
-
-module.exports = {
-  detailProduct: ({ product, onEventAdd, onEventClosed }) => {
-    if (product instanceof Product) {
+const DetailProductComponent = ({ product }) => {
+  return {
+    show: ({ onEventAdd, onEventClosed }) => {
       const { image, price, description, name } = product
-      imageProduct.setAttribute('src', image)
-      priceProduct.innerText = `$ ${price}`
-      nameProduct.innerText = name
-      descriptionProduct.innerText = description
+      return new ComponenteElementAside({
+        attributes: [
+          new ComponentAttribute({
+            id: 'class',
+            value: 'product-detail-article',
+          }),
+        ],
+        children: [
+          new ComponentElementDiv({
+            attributes: [
+              new ComponentAttribute({
+                id: 'class',
+                value: 'product-detail-article-close',
+              }),
+            ],
+            events: [
+              new ComponentEvent({
+                event: 'click',
+                callback: () => {
+                  onEventClosed()
+                },
+              }),
+            ],
+            children: [
+              new ComponentElementImage({
+                urlImage: '../assets/icons/icon_close.png',
+                attributes: [
+                  new ComponentAttribute({
+                    id: 'alt',
+                    value: 'close',
+                  }),
+                ],
+              }),
+            ],
+          }),
 
-      buttonClose.addEventListener('click', () => {
-        onEventClosed()
+          new ComponentElementImage({
+            urlImage: image,
+          }),
+
+          new ComponentElementDiv({
+            attributes: [
+              new ComponentAttribute({
+                id: 'class',
+                value: 'product-detail-article-info',
+              }),
+            ],
+            children: [
+              new ComponentElementP({
+                text: `$ ${price.toLocaleString()}`,
+              }),
+              new ComponentElementP({
+                text: name,
+              }),
+              new ComponentElementP({
+                text: description,
+              }),
+
+              new ComponentElementButton({
+                text: 'Agregar Carrito',
+                attributes: [
+                  new ComponentAttribute({
+                    id: 'class',
+                    value: 'primary-button add-to-cart-button',
+                  }),
+                ],
+                events: [
+                  new ComponentEvent({
+                    event: 'click',
+                    callback: () => {
+                      onEventAdd(product)
+                    },
+                  }),
+                ],
+                urlImage: '../assets/icons/bt_add_to_cart.svg',
+              }),
+            ],
+          }),
+        ],
       })
-
-      shoppingButton.addEventListener('click', () => {
-        onEventAdd(product)
-      })
-
-      // [shoppingButton, buttonClose].forEach((element) => {
-      //   element.addEventListener('click', () => {
-      //     resolve({
-      //       close: !element.getAttribute('id').includes('shoppingButton'),
-      //       productSelected: { name, image, price, description, ...values },
-      //     });
-      //   });
-      // });
-    }
-  },
+    },
+  }
 }
 
-/*
- <div class="product-detail-article-close">
-      <img src="./assets/icons/icon_close.png" alt="close">
-    </div>
-    <img
-      src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-      alt="bike">
+const DetailShoppingComponent = ({ products, total = 0 }) => {
+  return {
+    show: ({ onEventPay = () => {} }) => {
+      return new ComponenteElementAside({
+        attributes: [
+          new ComponentAttribute({
+            id: 'class',
+            value: 'product-detail active',
+          }),
+        ],
 
-    <div class="product-detail-article-info">
-      <p>$35,00</p>
-      <p>Bike</p>
-      <p>With its practical position, this bike also fulfills a decorative function, add your hall or workspace.</p>
-      <button class="primary-button add-to-cart-button">
-        <img src="./assets/icons/bt_add_to_cart.svg" alt="add to cart">
-        Add to cart
-      </button>
-    </div>
-*/
+        children: [
+          new ComponentElementDiv({
+            attributes: [
+              new ComponentAttribute({
+                id: 'class',
+                value: 'title-container',
+              }),
+            ],
+
+            children: [
+              new ComponentElementImage({
+                urlImage: '../assets/icons/flechita.svg',
+                attributes: [
+                  new ComponentAttribute({
+                    id: 'alt',
+                    value: 'arrow',
+                  }),
+                ],
+              }),
+              new ComponentElementP({
+                text: 'My order',
+                attributes: [
+                  new ComponentAttribute({
+                    id: 'class',
+                    value: 'title',
+                  }),
+                ],
+              }),
+            ],
+          }),
+
+          new ComponentElementDiv({
+            attributes: [
+              new ComponentAttribute({
+                id: 'class',
+                value: 'my-order-content',
+              }),
+            ],
+            children: products,
+          }),
+
+          new ComponentElementDiv({
+            attributes: [
+              new ComponentAttribute({
+                id: 'class',
+                value: 'order',
+              }),
+            ],
+            children: [
+              new ComponentElementP({
+                children: [
+                  new ComponenteElementSpan({
+                    text: 'Total',
+                  }),
+                ],
+              }),
+
+              new ComponentElementP({
+                text: `$ ${total}`,
+              }),
+            ],
+          }),
+
+          new ComponentElementButton({
+            attributes: [
+              new ComponentAttribute({
+                id: 'class',
+                value: 'primary-button',
+              }),
+            ],
+            events: [
+              new ComponentEvent({
+                event: 'click',
+                callback: () => {
+                  onEventPay()
+                },
+              }),
+            ],
+            text: 'Pagar',
+          }),
+        ],
+      })
+    },
+  }
+}
+
+module.exports = { DetailProductComponent, DetailShoppingComponent }

@@ -11,7 +11,7 @@ const {
   ComponentEvent,
 } = require('./core/Components')
 
-const mainContainer = document.querySelector('.main-container')
+// const mainContainer = document.querySelector('.main-container')
 
 module.exports = {
   sectionProducts: () => {
@@ -23,13 +23,13 @@ module.exports = {
         }),
       ],
     })
-    mainContainer.appendChild(cardsContainer)
     return cardsContainer
   },
 
-  cleanMainContainer: () => {
-    mainContainer.innerHTML = ''
-  },
+  // cleanMainContainer: () => {
+  //   // mainContainer.innerHTML = ''
+  // },
+
   sectionLogin: ({
     onLogin = () => {},
     onForgotPassword = () => {},
@@ -175,7 +175,7 @@ module.exports = {
         }),
       ],
     })
-    mainContainer.innerHTML = ''
-    mainContainer.appendChild(loginContainer)
+    // mainContainer.innerHTML = ''
+    // mainContainer.appendChild(loginContainer)
   },
 }

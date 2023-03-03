@@ -1,60 +1,66 @@
-const { addData, KINDSTORAGE } = require('../services/DBStorage')
 const { detailProduct } = require('../components/Detail')
 
 const { Product } = require('../models/Product')
-const { productCard, productShoppingCard } = require('../components/Cards')
+
 const {
   sectionProducts,
   cleanMainContainer,
 } = require('../components/SectionContainer')
-const {
-  getProducts,
-  filterProductsCategory,
-} = require('../services/ProductService')
+const { ProductService } = require('../services/ProductService')
+const { CardProductComponent } = require('../components')
 
-const productDetailArticle = document.querySelector('.product-detail-article')
+const ProductsController = () => {
+  const elementContainer = document.querySelector('#aside')
+  const productService = ProductService()
 
-module.exports = {
-  showArticleShopping: ({
-    product,
-    onEventAdd,
-    onEventClosed: onEventCloseListener,
+  const renderProducts = ({
+    products = [],
+    onEventAdd = () => {},
+    onEventDetail = () => {},
   }) => {
-    productDetailArticle.setAttribute('data-detail', 'active')
-    detailProduct({
-      product,
-      onEventAdd,
-      onEventClosed: () => {
-        productDetailArticle.setAttribute('data-detail', 'enactive')
-        onEventCloseListener()
-      },
-    })
-  },
-
-  showProduct: ({ onEventAdd, onEventDetail, codeCategories = '' }) => {
-    let products = []
-    cleanMainContainer()
-    if (codeCategories !== '') {
-      products = filterProductsCategory({ codeCategories })
-    } else {
-      products = getProducts()
-    }
-
     const cardsContainer = sectionProducts()
     products.forEach((product) =>
       cardsContainer.appendChild(
-        productCard({
+        CardProductComponent({
           product,
-          onEventAdd,
-          onEventDetail,
-        })
+        }).show({ onEventAdd, onEventDetail })
       )
     )
-  },
+    return cardsContainer
+  }
 
-  eventProductDetailArticleToggle: () => {
-    if (!productDetailArticle.getAttribute('data-detail').includes('enactive'))
-      return
-    productDetailArticle.classList.toggle('inactive')
-  },
+  return {
+    showProducts: ({ onEventAdd, onEventDetail }) => {
+      const products = productService.findAllProducts()
+      return renderProducts({ products, onEventAdd, onEventDetail })
+    },
+    showDetailProduct: ({ product, onEventAdd }) => {
+      if (product instanceof Product) {
+        const detailComponents = detailProduct({
+          product,
+          onEventAdd,
+          onEventClosed: () => {
+            elementContainer.innerHTML = ''
+          },
+        })
+
+        elementContainer.innerHTML = ''
+        elementContainer.appendChild(detailComponents)
+      }
+    },
+
+    showFilterCodeCategoryProducts: ({
+      codeCategory = '',
+      onEventAdd = () => {},
+      onEventDetail = () => {},
+    }) => {
+      cleanMainContainer() // TODO SE DEBE MEJORAR ESTA LOGICA
+      const products = productService.filterProductCodeCategory({
+        codeCategory,
+      })
+      renderProducts({ products, onEventAdd, onEventDetail })
+    },
+  }
 }
+
+module.exports = { ProductsController }

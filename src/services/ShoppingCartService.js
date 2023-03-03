@@ -1,23 +1,35 @@
-const { KINDSTORAGE, getData } = require('../services/DBStorage')
-let productsShopping = []
+const { KINDSTORAGE, getData, removeData, addData } = require('./DBStorage')
 
-module.exports = {
-  addProduct: (product) => {
-    if (productsShopping?.length > 0) {
-      productsShopping.unshift(product)
-      return productsShopping
-    }
+const ShoppingCartProductService = () => {
+  let productsShopping = []
+  const keyDBStorage = KINDSTORAGE.SHOPPING
 
-    productsShopping = []
-    productsShopping.push(product)
-    return productsShopping
-  },
+  return {
+    addProductCart: ({ product }) => {
+      if (productsShopping?.length > 0) {
+        productsShopping.unshift(product)
+      } else {
+        productsShopping = []
+        productsShopping.push(product)
+      }
 
-  getProduct: () => {
-    return productsShopping !== null ? [...productsShopping] : []
-  },
-  counterProduct: () => {
-    productsShopping = JSON.parse(getData({ key: KINDSTORAGE.SHOPPING }))
-    return productsShopping?.length ? productsShopping.length : 0
-  },
+      addData({ key: keyDBStorage, data: productsShopping })
+      return [...productsShopping]
+    },
+    getProductsCart: () => {
+      return productsShopping !== null ? [...productsShopping] : []
+    },
+    counterProductsCart: () => {
+      productsShopping = JSON.parse(getData({ key: keyDBStorage }))
+      return productsShopping?.length ? productsShopping.length : 0
+    },
+    removeProductsCart: () => {
+      removeData({ key: keyDBStorage })
+    },
+    isNotEmpityProductsCart: () => {
+      return productsShopping?.length > 0
+    },
+  }
 }
+
+module.exports = { ShoppingCartProductService }

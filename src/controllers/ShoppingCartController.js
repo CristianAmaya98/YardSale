@@ -1,68 +1,59 @@
-const { default: Swal } = require('sweetalert2')
-const { productShoppingCard } = require('../components/Cards')
 const { Product } = require('../models/Product')
-const { KINDSTORAGE, addData, removeData } = require('../services/DBStorage')
+
 const {
-  getProduct,
-  counterProduct,
-  addProduct,
+  ShoppingCartProductService,
 } = require('../services/ShoppingCartService')
+const {
+  CardShoppingComponent,
+  DetailShoppingComponent,
+} = require('../components')
+const { default: Swal } = require('sweetalert2')
 
-const navbarShoppingCart = document.querySelector('.navbar-shopping-cart')
-const productDetailShopping = document.querySelector('.product-detail')
-const myOrderContent = document.querySelector('.my-order-content')
-const counterCart = document.getElementById('count-cart')
-const buttonPagar = document.querySelector('#pagar')
-const totalPagar = document.querySelector('#total-pagar')
+// TODO: REVISAR ESTOS SELECTORES
+// const navbarShoppingCart = document.querySelector('.navbar-shopping-cart')
 
-module.exports = {
-  addProductShoppingCart: ({ product }) => {
-    if (product instanceof Product) {
-      addData({
-        key: KINDSTORAGE.SHOPPING,
-        data: addProduct(product),
-      })
-    }
-  },
+const ShoppingCartController = () => {
+  const elementContainer = document.querySelector('#aside')
+  const shoppingCartProductService = ShoppingCartProductService()
 
-  eventListenerShopping: ({ callback }) => {
-    navbarShoppingCart.addEventListener('click', () => {
-      productDetailShopping.classList.toggle('inactive')
-
-      if (!productDetailShopping.getAttribute('inactive')) {
-        myOrderContent.innerHTML = ''
-        callback()
+  return {
+    addProductShoppingCart: ({ product }) => {
+      if (product instanceof Product) {
+        shoppingCartProductService.addProductCart({ product })
       }
-    })
-  },
+    },
 
-  showProductShoppingCard: ({ callback }) => {
-    const prices = []
+    showProductShoppingCard: () => {
+      elementContainer.innerHTML = ''
 
-    if (getProduct().length <= 0) return
+      if (shoppingCartProductService.isNotEmpityProductsCart()) {
+        const products = shoppingCartProductService
+          .getProductsCart()
+          .map((product) => CardShoppingComponent({ product }).show())
 
-    for (const product of getProduct()) {
-      prices.push(Number(product.price))
-      myOrderContent.appendChild(productShoppingCard(product))
-    }
+        const shoppingDetail = DetailShoppingComponent({
+          products,
+          total: 10,
+        }).show({
+          onEventPay: () => {
+            Swal.fire(
+              'Pago Exitoso!',
+              'Felicitaciones tu Compra ha sido todo un existo!!!!!!',
+              'success'
+            )
+            shoppingCartProductService.removeProductsCart()
+          },
+        })
 
-    const total = prices.reduce((total, valor) => total + valor, 0)
-    totalPagar.innerText = `$ ${String(total).toLocaleString()}`
+        elementContainer.appendChild(shoppingDetail)
+      }
+    },
 
-    buttonPagar.addEventListener('click', () => {
-      Swal.fire(
-        'Pago Exitoso!',
-        'Felicitaciones tu Compra ha sido todo un existo!!!!!!',
-        'success'
-      )
-      totalPagar.innerText = `$ 0`
-      myOrderContent.innerHTML = ''
-      removeData({ key: KINDSTORAGE.SHOPPING })
-      callback()
-    })
-  },
-
-  showCounterShopping: () => {
-    counterCart.innerText = counterProduct()
-  },
+    showCounterShopping: () => {
+      const counterCart = document.getElementById('count-cart')
+      counterCart.innerText = shoppingCartProductService.counterProductsCart()
+    },
+  }
 }
+
+module.exports = { ShoppingCartController }
