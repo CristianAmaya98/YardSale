@@ -1,0 +1,39 @@
+@use 'variables' as v;
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: v.$font;
+  font-size: 1.6rem;
+  background-color: v.$bg-body;
+}
+
+[class$='__container'] {
+  width: 95%;
+  max-width: 170rem;
+  margin: 0 auto;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

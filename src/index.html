@@ -1,57 +1,302 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YardSale: Tienda Online</title>
-    <link rel="stylesheet" href="./css/main.min.css" />
-  </head>
 
-  <body>
-    <main id="root-main"></main>
-    <!-- <header>
-    <nav>
-      <img src="./assets/icons/icon_menu.svg" alt="menu" class="menu" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YardSale: Tienda Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.min.css" />
+</head>
 
-      <div class="navbar-left">
-        <img src="./assets/logos/logo_yard_sale.svg" alt="logo" class="logo" />
-        <ul id="items-navbar"></ul>
+<body>
+  <header class="header">
+    <div class="header__contenido header__container">
+      <img src="./assets/icons/icon_menu.svg" alt="logo Menu" class="header__menu">
+
+      <div class="header__nav">
+        <img src="./assets/logos/logo_yard_sale.svg" alt="logo" class="header__logo">
       </div>
 
-      <div class="navbar-right">
-        <ul>
-          <li class="navbar-email">user@example.com</li>
-          <li class="navbar-shopping-cart">
-            <img src="./assets/icons/icon_shopping_cart.svg" alt="shopping cart" />
-            <div id="count-cart">0</div>
+      <div class="header__shopping">
+        <ul class="shopping">
+          <li id="shopping-cart" class="shopping__cart-icon">
+            <span id="counter-shopping" class="shopping__cart-counter">0</span>
           </li>
+          <li id="email-shopping" class="shopping__email">
+            <span class="shopping__email-icon">U</span>
+            user@example.com
+          </li>
+
         </ul>
       </div>
-
-      <div class="desktop-menu inactive">
-        <ul>
-          <li>
-            <a href="/" class="title">My orders</a>
-          </li>
-
-          <li>
-            <a href="/">My account</a>
-          </li>
-
-          <li>
-            <a href="/">Sign out</a>
-          </li>
-        </ul>
-      </div>
-
-    </nav>
+    </div>
   </header>
 
-  <main>
-    <section id="aside"></section>
-    <section class="main-container"></section>
-  </main> -->
-    <script src="./js/bundle.all.js"></script>
-  </body>
+  <main class="main">
+    <div id="root" class="main__container"> <!--id="root"-->
+
+      <!-- SECTION DEL LOGIN
+        <div class="login">
+        <div class="login__contenido">
+          <img src="./assets/logos/logo_yard_sale.svg" alt="logo" class="login__logo">
+
+          <form class="formulario">
+            <label for="email" class="formulario__label">Email address</label>
+            <input type="text" id="email" placeholder="platzi@example.cm"
+              class="formulario__input formulario__input--email">
+
+            <label for="password" class="formulario__label">Password</label>
+            <input type="password" id="password" placeholder="*********"
+              class="formulario__input formulario__input--password">
+
+            <input type="submit" value="Log in" class="formulario__submit">
+            <a href="/" class="formulario__reset-password">Forgot my password</a>
+          </form>
+
+          <button class="login__button">Sign up</button>
+        </div>
+      -->
+
+      <!-- <div class="productos">
+        <div class="producto">
+          <img class="producto__imagen"
+            src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+            alt="">
+          <div class="producto__info">
+            <div class="producto__textos">
+              <p class="producto__price">$120,00</p>
+              <p class="producto__name">Bike</p>
+            </div>
+            <span class="producto__icon-cart"></span>
+          </div>
+        </div>
+      </div> -->
+
+      <!--DETAIL-->
+      <!-- <div class="detail">
+        <div class="detail__grid">
+          <div class="detail__contenido-img">
+            <img class="detail__image"
+              src="https://images.pexels.com/photos/3031670/pexels-photo-3031670.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt="">
+          </div>
+          <div class="detail__description">
+            <h2 class="detail__title">Celular Nokia 6300 - 4gb Negro</h2>
+            <span class="detail__price">$ 396.900</span>
+
+            <p>Producto Disponible</p>
+
+            <form action="" class="formulario">
+              <div class="formulario__campo formulario__campo--half">
+                <label for="color" class="formulario__label">Color: </label>
+                <select class="formulario__input" name="color" id="color">
+                  <option value="" selected disabled>-- Selccione un Color --</option>
+                  <option value="">Charcoal</option>
+                  <option value="">Azul</option>
+                </select>
+              </div>
+
+
+              <div class="formulario__campo formulario__campo--half">
+                <label class="formulario__label" for="cantidad">Cantidad: </label>
+                <select class="formulario__input " name="cantidad" id="cantidad">
+                  <option value="">1 Unidad</option>
+                  <option value="">2 Unidad</option>
+                  <option value="">3 Unidad</option>
+                  <option value="">4 Unidad</option>
+                  <option value="">5 Unidad</option>
+                  <option value="">6 Unidad</option>
+                  <option value="">Mas 6 Unidades</option>
+                </select>
+              </div>
+
+              <div class="formulario__campo formulario__campo--flex-row">
+                <input class="formulario__submit formulario__submit--pay" type="submit" value="Comprar ahora" />
+                <input class="formulario__submit formulario__submit--add" type="submit" value="Agregar al carrito" />
+              </div>
+
+            </form>
+          </div>
+
+          <div class="characteristic">
+            <h3 class="characteristic__title">Descripción</h3>
+            <p class="characteristic__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, autem iusto?
+              Consequuntur repellendus iste labore accusamus necessitatibus laboriosam, autem repellat, aperiam
+              temporibus harum magni non quis quia fugit velit voluptatibus! Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Illo, autem iusto?
+              Consequuntur repellendus iste labore accusamus necessitatibus laboriosam, autem repellat, aperiam
+              temporibus harum magni non quis quia fugit velit voluptatibus!
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, autem iusto?
+              Consequuntur repellendus iste labore accusamus necessitatibus laboriosam, autem repellat, aperiam
+              temporibus harum magni non quis quia fugit velit voluptatibus!</p>
+
+            <div class="detail-product">
+              <h3 class="detail-product__title">Características del producto</h3>
+
+              <div class="characteristics">
+
+                <div class="characteristics__contenido">
+                  <h3 class="characteristics__title">Características generales</h3>
+                  <ul class="characteristics__detail">
+                    <li class="characteristics__item">
+                      Marca <span class="characteristics__value">Nokia</span>
+                    </li>
+                    <li class="characteristics__item">
+                      Modelo<span class="characteristics__value">6300 4G</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="characteristics__contenido">
+                  <h3 class="characteristics__title">Características generales</h3>
+                  <ul class="characteristics__detail">
+                    <li class="characteristics__item">
+                      Marca <span class="characteristics__value">Nokia</span>
+                    </li>
+                    <li class="characteristics__item">
+                      Modelo<span class="characteristics__value">6300 4G</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="characteristics__contenido">
+                  <h3 class="characteristics__title">Características generales</h3>
+                  <ul class="characteristics__detail">
+                    <li class="characteristics__item">
+                      Marca <span class="characteristics__value">Nokia</span>
+                    </li>
+                    <li class="characteristics__item">
+                      Modelo<span class="characteristics__value">6300 4G</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="characteristics__contenido">
+                  <h3 class="characteristics__title">Características generales</h3>
+                  <ul class="characteristics__detail">
+                    <li class="characteristics__item">
+                      Marca <span class="characteristics__value">Nokia</span>
+                    </li>
+                    <li class="characteristics__item">
+                      Modelo<span class="characteristics__value">6300 4G</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="characteristics__contenido">
+                  <h3 class="characteristics__title">Características generales</h3>
+                  <ul class="characteristics__detail">
+                    <li class="characteristics__item">
+                      Marca <span class="characteristics__value">Nokia</span>
+                    </li>
+                    <li class="characteristics__item">
+                      Modelo<span class="characteristics__value">6300 4G</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="characteristics__contenido">
+                  <h3 class="characteristics__title">Características generales</h3>
+                  <ul class="characteristics__detail">
+                    <li class="characteristics__item">
+                      Marca <span class="characteristics__value">Nokia</span>
+                    </li>
+                    <li class="characteristics__item">
+                      Modelo<span class="characteristics__value">6300 4G</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!--
+      <div class="shopping-my-cart">
+
+    <div class="shopping-my-cart__title-container">
+        <img class="shopping-my-cart__imagen" src="./assets/icons/flechita.svg" alt="arrow">
+        <p class="shopping-my-cart__title">Mi Carrito de Compras</p>
+    </div>
+
+    <div class="shoppings">
+        <div class="shopping-cart">
+        <img class="shopping-cart__imagen"
+            src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+            alt="bike">
+
+        <p class="shopping-cart__title">Bike</p>
+        <p class="shopping-cart__price">$30,00</p>
+        <img class="shopping-cart__close" src="./assets/icons/icon_close.png" alt="close">
+        </div>
+
+        <div class="shopping-cart">
+        <img class="shopping-cart__imagen"
+            src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+            alt="bike">
+
+        <p class="shopping-cart__title">Bike</p>
+        <p class="shopping-cart__price">$30,00</p>
+        <img class="shopping-cart__close" src="./assets/icons/icon_close.png" alt="close">
+        </div>
+        <div class="shopping-cart">
+        <img class="shopping-cart__imagen"
+            src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+            alt="bike">
+
+        <p class="shopping-cart__title">Bike</p>
+        <p class="shopping-cart__price">$30,00</p>
+        <img class="shopping-cart__close" src="./assets/icons/icon_close.png" alt="close">
+        </div>
+
+        <div class="shopping-cart">
+        <img class="shopping-cart__imagen"
+            src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+            alt="bike">
+
+        <p class="shopping-cart__title">Bike</p>
+        <p class="shopping-cart__price">$30,00</p>
+        <img class="shopping-cart__close" src="./assets/icons/icon_close.png" alt="close">
+        </div>
+        <div class="shopping-cart">
+        <img class="shopping-cart__imagen"
+            src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+            alt="bike">
+
+        <p class="shopping-cart__title">Bike</p>
+        <p class="shopping-cart__price">$30,00</p>
+        <img class="shopping-cart__close" src="./assets/icons/icon_close.png" alt="close">
+        </div>
+    </div>
+
+    <div class="order">
+        <span class="order__title">Total</span>
+        <p class="order__price">$ 560.00</p>
+    </div>
+
+    <div class="buttons">
+        <button class="button button--primary">
+        Limpiar Carrito
+        </button>
+        <button class="button">
+        Continuar Compra
+        </button>
+    </div>
+
+    </div>
+</div>
+     -->
+  </main>
+
+  <footer class="footer">
+    <div class="footer__container">
+      <p class="footer__copyright">
+        Todos los Derechos Reservados &copy; YardSale
+      </p>
+    </div>
+  </footer>
+
+  <script src="./js/bundle.all.js"></script>
+</body>
+
 </html>

@@ -8,18 +8,20 @@ const concat = require('gulp-concat')
 const babel = require('gulp-babel')
 const sourcemaps = require('gulp-sourcemaps')
 const eslint = require('gulp-eslint')
+const sass = require('gulp-sass')(require('sass'))
+const postcss = require('gulp-postcss')
+const cssnano = require('cssnano')
 
 const babelify = require('babelify')
 const browserify = require('browserify')
 const buffer = require('vinyl-buffer')
 const source = require('vinyl-source-stream')
-const uglify = require('gulp-uglify')
 
 const paths = {
   src: {
     eslint: './src',
-    css: './src/styles/*.css',
-    js: './src/app.js',
+    scss: './src/scss/*.scss',
+    js: './src/js/app.js',
     assets: './src/assets/**/*',
     html: './src/*.html',
   },
@@ -31,7 +33,16 @@ const paths = {
     html: './dist',
   },
   watch: {
-    js: './src/**/*.js',
+    js: './src/js/**/*.js',
+    scss: './src/scss/**/*.scss',
+  },
+}
+
+const config = {
+  browserify: {
+    fileName: 'app.js',
+    extensions: ['.js'],
+    transform: [babelify],
   },
 }
 
@@ -42,7 +53,7 @@ const esLint = () => {
     .pipe(eslint.failOnError())
 }
 
-const transferirHTML = () => {
+const taskCompilarHTML = () => {
   return src(paths.src.html)
     .pipe(
       htmlmin({
@@ -54,15 +65,7 @@ const transferirHTML = () => {
     .pipe(connect.reload())
 }
 
-const config = {
-  browserify: {
-    fileName: 'app.js',
-    extensions: ['.js'],
-    transform: [babelify],
-  },
-}
-
-const transferirJavaScript = () => {
+const taskCompilarJS = () => {
   return browserify({
     entries: paths.src.js,
     debug: true,
@@ -83,15 +86,23 @@ const transferirJavaScript = () => {
     .pipe(connect.reload())
 }
 
-const transferirCSS = () => {
-  return src(paths.src.css)
+const taskCompilarSASS = () => {
+  return src(paths.src.scss)
+    .pipe(sourcemaps.init())
+    .pipe(
+      sass({
+        outputStyle: 'expanded',
+      }).on('error', sass.logError)
+    )
     .pipe(
       autoprefixer({
         cascade: false,
       })
     )
+    .pipe(postcss([cssnano()]))
     .pipe(cssmin())
     .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('.'))
     .pipe(dest(paths.build.css))
     .pipe(connect.reload())
 }
@@ -104,7 +115,7 @@ const assetsTransfer = () => {
 
 const connectLiveReload = () => {
   connect.server({
-    name: 'Restaurant',
+    name: 'YARDSALE',
     root: paths.build.root,
     livereload: true,
     port: 3070,
@@ -112,16 +123,16 @@ const connectLiveReload = () => {
 }
 
 const watchAndReload = () => {
-  watch(paths.src.html, transferirHTML)
-  watch(paths.src.css, transferirCSS)
-  watch([paths.src.js, paths.watch.js], transferirJavaScript, esLint)
+  watch(paths.src.html, taskCompilarHTML)
+  watch(paths.watch.scss, taskCompilarSASS)
+  watch([paths.src.js, paths.watch.js], taskCompilarJS, esLint)
   watch(paths.src.assets, assetsTransfer)
 }
 
 exports.default = series(
-  transferirHTML,
-  transferirCSS,
-  transferirJavaScript,
+  taskCompilarHTML,
+  taskCompilarSASS,
+  taskCompilarJS,
   esLint,
   assetsTransfer,
   parallel(watchAndReload, connectLiveReload)

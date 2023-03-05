@@ -1,0 +1,26 @@
+@use 'base/variables' as v;
+
+.header {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid v.$very-light-pink;
+  background-color: v.$white;
+  position: relative;
+
+  &__menu {
+    display: none;
+  }
+
+  &__contenido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__nav,
+  &__shopping {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+  }
+}
