@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp",
+    "deploy": "npm run precommit && gh-pages -d dist",
     "precommit": "npm run format && npm run lint-fix",
     "lint": "eslint ./",
     "lint-fix": "eslint ./ --cache --cache-strategy content --fix",
@@ -41,6 +42,7 @@
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
+    "gh-pages": "^5.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-babel": "^8.0.0",

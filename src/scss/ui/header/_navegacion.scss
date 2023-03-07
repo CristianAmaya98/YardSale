@@ -51,6 +51,13 @@
     border-radius: 10rem;
   }
 
+  &__email-texto {
+    display: none;
+    @include m.tablet {
+      display: block;
+    }
+  }
+
   &__cart-icon {
     width: 2.5rem;
     height: 2.5rem;

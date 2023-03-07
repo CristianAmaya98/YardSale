@@ -4,7 +4,9 @@
 .shopping-my-cart {
   display: flex;
   flex-direction: column;
-  padding: 2rem 4rem;
+  @include m.desktop {
+    padding: 2rem 4rem;
+  }
 
   &__title-container {
     width: 100%;
@@ -18,25 +20,68 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 2rem;
+    display: none;
+
+    @include m.desktop {
+      display: block;
+    }
   }
 
   &__title {
     font-size: 2.4rem;
     font-weight: bold;
   }
+
+  &__grid {
+    width: 100%;
+    margin: 0 auto;
+
+    @include m.desktop {
+      width: 90%;
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+
+  &__menu {
+    display: none;
+
+    @include m.desktop {
+      display: block;
+    }
+  }
+
+  &__pay-contenido {
+    @include m.desktop {
+      grid-column: 2 / 5;
+    }
+  }
+
+  &__pay {
+    @include m.desktop {
+      grid-column: 5 / 7;
+    }
+  }
 }
 
 .shoppings {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 5rem;
+  grid-template-columns: repeat(1, 1fr);
+  column-gap: 2rem;
+  max-height: 60vh;
+  overflow-y: scroll;
+
+  @include m.desktop {
+     max-height: 70vh;
+  }
 }
 
 .shopping-cart {
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   gap: 1.6rem;
-  margin-bottom: 2.4rem;
+  margin-bottom: 1.4rem;
   align-items: center;
   background-color: v.$white;
   padding: 1rem 3rem;
@@ -68,6 +113,7 @@
   margin-bottom: 2.4rem;
   border-radius: 0.8rem;
   padding: 0 2.4rem;
+  border: 1px solid v.$hospital-green;
 
   &__title {
     font-size: v.$md;
@@ -80,3 +126,17 @@
   }
 }
 
+.buttons-pay {
+  display: flex;
+  gap: 2rem;
+}
+
+.button {
+  display: block;
+  @include m.boton(v.$hospital-green, v.$white, transparent);
+  width: 100%;
+
+  &--primary {
+    @include m.boton(v.$white, v.$hospital-green, v.$hospital-green);
+  }
+}

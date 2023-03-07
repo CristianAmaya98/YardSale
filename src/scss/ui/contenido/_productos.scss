@@ -4,13 +4,19 @@
 .productos {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 24rem);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2.6rem;
   place-content: center;
+
+  @include m.desktop {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 
 .producto {
   width: 100%;
+  min-width: 17rem;
+  max-width: 24rem;
   transition-property: transform;
   transition-duration: 0.3s;
 

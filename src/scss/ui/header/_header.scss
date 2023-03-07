@@ -23,4 +23,13 @@
     gap: 2rem;
     position: relative;
   }
+
+  &__logo {
+    transition-property: transform;
+    transition-duration: 0.3s;
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+  }
 }

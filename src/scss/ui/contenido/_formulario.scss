@@ -49,7 +49,9 @@
     }
 
     &--half {
-      max-width: 50%;
+      @include m.desktop {
+        max-width: 50%;
+      }
     }
   }
 
