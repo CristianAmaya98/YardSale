@@ -6,7 +6,7 @@ const detailProduct = (product) => {
   const detailContainer = document.createElement('div')
   detailContainer.setAttribute('class', 'detail')
 
-    detailContainer.innerHTML = screenDetailProduct({ product });
+  detailContainer.innerHTML = screenDetailProduct({ product })
 
   RootMainContainer({
     element: detailContainer,

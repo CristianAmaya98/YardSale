@@ -1,46 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YardSale: Tienda Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="./css/app.min.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YardSale: Tienda Online</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/app.min.css" />
-</head>
+  <body>
+    <header class="header">
+      <div class="header__contenido header__container">
+        <img
+          src="./assets/icons/icon_menu.svg"
+          alt="logo Menu"
+          class="header__menu" />
 
-<body>
-  <header class="header">
-    <div class="header__contenido header__container">
-      <img src="./assets/icons/icon_menu.svg" alt="logo Menu" class="header__menu">
+        <div class="header__nav">
+          <img
+            id="logo"
+            src="./assets/logos/logo_yard_sale.svg"
+            alt="logo"
+            class="header__logo" />
+        </div>
 
-      <div class="header__nav">
-        <img id="logo" src="./assets/logos/logo_yard_sale.svg" alt="logo" class="header__logo">
+        <div class="header__shopping">
+          <ul class="shopping">
+            <li id="shopping-cart" class="shopping__cart-icon">
+              <span id="counter-shopping" class="shopping__cart-counter"
+                >0</span
+              >
+            </li>
+            <li id="email-shopping" class="shopping__email">
+              <span class="shopping__email-icon">U</span>
+              <span class="shopping__email-texto">user@example.com</span>
+            </li>
+          </ul>
+        </div>
       </div>
+    </header>
 
-      <div class="header__shopping">
-        <ul class="shopping">
-          <li id="shopping-cart" class="shopping__cart-icon">
-            <span id="counter-shopping" class="shopping__cart-counter">0</span>
-          </li>
-          <li id="email-shopping" class="shopping__email">
-            <span class="shopping__email-icon">U</span>
-            <span class="shopping__email-texto">user@example.com</span>
-           
-          </li>
+    <main class="main">
+      <div id="root" class="main__container">
+        <!--id="root"-->
 
-        </ul>
-      </div>
-    </div>
-  </header>
-
-  <main class="main">
-    <div id="root" class="main__container"> <!--id="root"-->
-
-      <!-- SECTION DEL LOGIN
+        <!-- SECTION DEL LOGIN
         <div class="login">
         <div class="login__contenido">
           <img src="./assets/logos/logo_yard_sale.svg" alt="logo" class="login__logo">
@@ -62,7 +71,7 @@
         </div>
       -->
 
-      <!-- <div class="productos">
+        <!-- <div class="productos">
         <div class="producto">
           <img class="producto__imagen"
             src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
@@ -77,8 +86,8 @@
         </div>
       </div> -->
 
-      <!--DETAIL-->
-      <!-- <div class="detail">
+        <!--DETAIL-->
+        <!-- <div class="detail">
         <div class="detail__grid">
           <div class="detail__contenido-img">
             <img class="detail__image"
@@ -212,8 +221,7 @@
         </div>
       </div> -->
 
-
-      <!-- <div class="shopping-my-cart">
+        <!-- <div class="shopping-my-cart">
 
         <div class="shopping-my-cart__title-container">
           <img class="shopping-my-cart__imagen" src="./assets/icons/flechita.svg" alt="arrow">
@@ -264,19 +272,17 @@
         </div>
 
       </div> -->
-    </div>
+      </div>
+    </main>
 
-  </main>
+    <footer class="footer">
+      <div class="footer__container">
+        <p class="footer__copyright">
+          Todos los Derechos Reservados &copy; YardSale
+        </p>
+      </div>
+    </footer>
 
-  <footer class="footer">
-    <div class="footer__container">
-      <p class="footer__copyright">
-        Todos los Derechos Reservados &copy; YardSale
-      </p>
-    </div>
-  </footer>
-
-  <script src="./js/bundle.all.js"></script>
-</body>
-
+    <script src="./js/bundle.all.js"></script>
+  </body>
 </html>
