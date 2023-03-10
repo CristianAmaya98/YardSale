@@ -1,3 +1,5 @@
+const { getDetailProduct } = require('../controllers/DetailProductController')
+
 const getAmountUnit = (product, limit) => {
   let options = ''
 
@@ -13,7 +15,7 @@ const getAmountUnit = (product, limit) => {
   return options
 }
 
-const screenDetailProduct = ({ product }) => {
+const renderHTMLDetailProduct = ({ product }) => {
   return `<div class="detail__grid">
     <div class="detail__contenido-img">
     <img class="detail__image"
@@ -22,7 +24,9 @@ const screenDetailProduct = ({ product }) => {
     </div>
     <div class="detail__description">
     <h2 class="detail__title">${product.product?.name}</h2>
-    <span class="detail__price">$ 396.900</span>
+    <span class="detail__price">$ ${Number(
+      product.product?.price
+    ).toLocaleString()}</span>
 
     <p>${
       product?.available ? 'Producto Disponible' : 'Producto No Disponible'
@@ -46,7 +50,7 @@ const screenDetailProduct = ({ product }) => {
         ${getAmountUnit(product, 7)}
         </select>
         </div>
-        
+
         <div class="formulario__campo formulario__campo--flex-row">
             <input class="formulario__submit formulario__submit--pay" type="submit" value="Comprar ahora" ${
               product?.available ? '' : 'disabled'
@@ -91,4 +95,14 @@ const screenDetailProduct = ({ product }) => {
 </div>`
 }
 
-module.exports = { screenDetailProduct }
+module.exports = function ({ data }) {
+  if (!data) return
+
+  const [uuid] = data
+  const product = getDetailProduct(uuid)
+  const detailProduct = document.createElement('div')
+  detailProduct.classList.add('detail')
+  detailProduct.innerHTML = renderHTMLDetailProduct({ product })
+
+  return detailProduct
+}

@@ -69,7 +69,8 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   column-gap: 2rem;
-  max-height: 60vh;
+  min-height: 60vh;
+  max-height: 65vh;
   overflow-y: scroll;
 
   @include m.desktop {
@@ -79,6 +80,7 @@
 
 .shopping-cart {
   display: grid;
+  max-height: 90px;
   grid-template-columns: auto 1fr auto auto;
   gap: 1.6rem;
   margin-bottom: 1.4rem;

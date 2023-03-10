@@ -305,6 +305,20 @@ function ComponentElementSection({
   })
 }
 
+function ComponenteElement({
+  element,
+  attributes = [],
+  text = '',
+  events = [],
+}) {
+  return new _ComponentElement({
+    element,
+    attributes,
+    text,
+    events,
+  })
+}
+
 module.exports = {
   ComponentAttribute,
   ComponentEvent,
@@ -324,4 +338,5 @@ module.exports = {
   ComponenteElementNav,
   ComponenteElementUl,
   ComponentElementSection,
+  ComponenteElement,
 }

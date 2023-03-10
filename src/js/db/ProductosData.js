@@ -1,5 +1,6 @@
 module.exports = [
   {
+    uuid: 1,
     product: {
       name: 'Celular Nokia 6300 - 4gb Negro',
       image:
@@ -88,6 +89,7 @@ module.exports = [
     ],
   },
   {
+    uuid: 2,
     product: {
       name: 'Bicicleta',
       image:
@@ -176,6 +178,7 @@ module.exports = [
     ],
   },
   {
+    uuid: 3,
     product: {
       name: 'Camara',
       image:
@@ -264,6 +267,7 @@ module.exports = [
     ],
   },
   {
+    uuid: 4,
     product: {
       name: 'Televisor',
       image:
@@ -352,6 +356,7 @@ module.exports = [
     ],
   },
   {
+    uuid: 5,
     product: {
       name: 'Computador',
       image:
@@ -440,6 +445,7 @@ module.exports = [
     ],
   },
   {
+    uuid: 6,
     product: {
       name: 'Laptop',
       image:
@@ -528,6 +534,7 @@ module.exports = [
     ],
   },
   {
+    uuid: 7,
     product: {
       name: 'Drones X',
       image:
@@ -616,6 +623,7 @@ module.exports = [
     ],
   },
   {
+    uuid: 8,
     product: {
       name: 'Celular Nokia 6300 - 4gb Negro',
       image:
@@ -704,6 +712,7 @@ module.exports = [
     ],
   },
   {
+    uuid: 9,
     product: {
       name: 'Bicicleta',
       image:
@@ -792,6 +801,7 @@ module.exports = [
     ],
   },
   {
+    uuid: 10,
     product: {
       name: 'Camara',
       image:
@@ -880,6 +890,7 @@ module.exports = [
     ],
   },
   {
+    uuid: 11,
     product: {
       name: 'Televisor',
       image:
@@ -968,6 +979,7 @@ module.exports = [
     ],
   },
   {
+    uuid: 12,
     product: {
       name: 'Computador',
       image:
@@ -1056,6 +1068,7 @@ module.exports = [
     ],
   },
   {
+    uuid: 13,
     product: {
       name: 'Laptop',
       image:
@@ -1144,6 +1157,7 @@ module.exports = [
     ],
   },
   {
+    uuid: 14,
     product: {
       name: 'Drones X',
       image:

@@ -1,16 +1,7 @@
-const { screenDetailProduct } = require('../components/screen/DetailProduct')
-const { RootMainContainer } = require('./RootController')
+const { findByUUIDProduct } = require('../services/ProductosService')
 
-const detailProduct = (product) => {
-  console.log({ product })
-  const detailContainer = document.createElement('div')
-  detailContainer.setAttribute('class', 'detail')
-
-  detailContainer.innerHTML = screenDetailProduct({ product })
-
-  RootMainContainer({
-    element: detailContainer,
-  })
+const getDetailProduct = (uuid) => {
+  return findByUUIDProduct(Number(uuid))
 }
 
-module.exports = { detailProduct }
+module.exports = { getDetailProduct }

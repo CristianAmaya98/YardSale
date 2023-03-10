@@ -1,5 +1,6 @@
-const { getAllProducts } = require('./ProductsController')
-const { RootMainContainer } = require('./RootController')
-const { counterCartShopping } = require('./ShoppingCartController')
-
-module.exports = { getAllProducts, counterCartShopping, RootMainContainer }
+module.exports = {
+  getAllProducts: require('./ProductsController'),
+  RootMainContainer: require('./RootController'),
+  counterCartShopping: require('./ShoppingCartController'),
+  validateSection: require('./UserController'),
+}

@@ -5,4 +5,8 @@ const findAllProducts = () => {
   return JSON.parse(products)
 }
 
-module.exports = { findAllProducts }
+const findByUUIDProduct = (uuid) => {
+  return ProductosData.find((product) => product.uuid === uuid)
+}
+
+module.exports = { findAllProducts, findByUUIDProduct }

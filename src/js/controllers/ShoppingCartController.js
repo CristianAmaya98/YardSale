@@ -1,15 +1,12 @@
-const {
-  screenShoppingProduct,
-} = require('../components/screen/ShoppingProduct')
+const { default: Swal } = require('sweetalert2')
 const {
   counterProductsShopping,
   saveProductShopping,
   findAllProductsShopping,
+  deleteProductsShopping,
 } = require('../services/ProductosStorageService')
-const { RootMainContainer } = require('./RootController')
 
 const counterShopping = document.querySelector('#counter-shopping')
-const shoppingCart = document.querySelector('#shopping-cart')
 
 const counterCartShopping = () => {
   counterShopping.innerText = counterProductsShopping()
@@ -20,17 +17,23 @@ const addProductShopping = (product) => {
   counterCartShopping()
 }
 
-const showShoppingCart = () => {
-  shoppingCart.addEventListener('click', () => {
-    const productCart = findAllProductsShopping()
-    RootMainContainer({
-      element: screenShoppingProduct(productCart),
-    })
-  })
+const onCleanShopping = () => {
+  deleteProductsShopping()
+  counterCartShopping()
+}
+const onPayShopping = () => {
+  Swal.fire('Compra Exitosa!', 'Compra realizada Exitosamente!', 'success')
+  onCleanShopping()
+}
+
+const getAllProductShopping = () => {
+  return findAllProductsShopping()
 }
 
 module.exports = {
   counterCartShopping,
   addProductShopping,
-  showShoppingCart,
+  getAllProductShopping,
+  onPayShopping,
+  onCleanShopping,
 }

@@ -1,36 +1,36 @@
+const {
+  saveProductsStorage,
+  findAllStorage,
+  deleteAllStorage,
+} = require('./DBLocalStorage')
+
 let productsStorage = []
 
 const KINS_STORAGE = 'shopping'
 
-const saveProductsStorage = (products) => {
-  localStorage.setItem(KINS_STORAGE, JSON.stringify(products))
-}
-const findAllProductsStorage = () => {
-  return JSON.parse(localStorage.getItem(KINS_STORAGE))
-}
-
 const saveProductShopping = ({ product }) => {
-  productsStorage = findAllProductsStorage() ?? []
-  if (productsStorage.length > 0) {
-    productsStorage.unshift(product)
-  } else {
-    productsStorage.push(product)
-  }
-  saveProductsStorage(productsStorage)
+  productsStorage = findAllStorage({ key: KINS_STORAGE }) ?? []
+  productsStorage = [product, ...productsStorage]
+  saveProductsStorage({ key: KINS_STORAGE, data: productsStorage })
 }
 
 const findAllProductsShopping = () => {
-  productsStorage = findAllProductsStorage()
+  productsStorage = findAllStorage({ key: KINS_STORAGE })
   return [...productsStorage]
 }
 
 const counterProductsShopping = () => {
-  productsStorage = findAllProductsStorage()
+  productsStorage = findAllStorage({ key: KINS_STORAGE })
   return productsStorage?.length ?? 0
+}
+
+const deleteProductsShopping = () => {
+  deleteAllStorage({ key: KINS_STORAGE })
 }
 
 module.exports = {
   saveProductShopping,
   findAllProductsShopping,
   counterProductsShopping,
+  deleteProductsShopping,
 }

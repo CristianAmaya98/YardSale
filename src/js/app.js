@@ -1,12 +1,16 @@
-const { counterCartShopping, getAllProducts } = require('./controllers')
-const { showShoppingCart } = require('./controllers/ShoppingCartController')
+const { counterCartShopping } = require('./controllers')
+const shoppingCart = document.querySelector('#shopping-cart')
+// const emailShopping = document.querySelector('#email-shopping')
 
-const logo = document.querySelector('#logo')
+const routing = require('./routes/routing')
 
-logo.addEventListener('click', () => {
-  getAllProducts()
+window.location.href = '#/'
+
+shoppingCart.addEventListener('click', () => {
+  window.location.href = '#/shopping'
 })
 
-counterCartShopping()
-getAllProducts()
-showShoppingCart()
+window.addEventListener('hashchange', () => {
+  const route = window.location.hash
+  routing(route)
+})
